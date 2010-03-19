@@ -2,4 +2,6 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+0.001     2010-03-19 16:07:20 EST5EDT
+
     - first release to CPAN

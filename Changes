@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+0.002     2010-03-19 18:00:57 EST5EDT
+
     - add prerequisites list (whoops!  not automated yet!)
 
 0.001     2010-03-19 16:07:20 EST5EDT

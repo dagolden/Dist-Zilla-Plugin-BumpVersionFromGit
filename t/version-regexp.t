@@ -18,11 +18,10 @@ $git->add(".");
 $git->commit({ message => 'import' });
 my ($zilla, $version);
 
-# with no tags and no initialization, should fail
-throws_ok {
-  $zilla = Dist::Zilla->from_config;
-  $version = $zilla->version;
-} qr/Could not determine last version from tags/, "fails when no tags";
+# with no tags and no initialization, should get default
+$zilla = Dist::Zilla->from_config;
+$version = $zilla->version;
+is( $version, "0.01", "default is 0.01" ); # set in dist.ini
 
 # initialize it
 {

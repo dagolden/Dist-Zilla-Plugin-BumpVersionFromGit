@@ -2,6 +2,9 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+    - add 'first_version' attribute to initialize version when no tags
+      exist in the repository (defaults to 0.001)
+
 0.002     2010-03-19 18:00:57 EST5EDT
 
     - add prerequisites list (whoops!  not automated yet!)

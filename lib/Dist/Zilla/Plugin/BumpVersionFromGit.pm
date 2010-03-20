@@ -15,6 +15,8 @@ with 'Dist::Zilla::Role::VersionProvider';
 
 has version_regexp  => ( is => 'ro', isa=>'Str', default => '^v(.+)$' );
 
+has first_version  => ( is => 'ro', isa=>'Str', default => '0.001' );
+
 # -- role implementation
 
 sub provide_version {
@@ -28,11 +30,13 @@ sub provide_version {
   my $git  = Git::Wrapper->new('.');
   my $regexp = $self->version_regexp;
 
+  my @tags = $git->tag;
+  return $self->first_version unless @tags;
+
   # find highest version from tags
   my ($last_ver) =  sort { version->parse($b) <=> version->parse($a) }
   grep { eval { version->parse($_) }  }
-  map  { /$regexp/ ? $1 : ()          }
-  $git->tag;
+  map  { /$regexp/ ? $1 : ()          } @tags;
 
   $self->log_fatal("Could not determine last version from tags")
   unless defined $last_ver;
@@ -59,6 +63,7 @@ __END__
 In your F<dist.ini>:
 
     [BumpVersionFromGit]
+    first_version = 0.001       ; this is the default
     version_regexp  = ^v(.+)$   ; this is the default
 
 = DESCRIPTION
@@ -69,16 +74,15 @@ Dist::Zilla.
 
 The plugin accepts the following options:
 
+* first_version - if the repository has no tags at all, this version
+is used as the first version for the distribution.  It defaults to "0.001".
 * version_regexp - regular expression that matches a tag containing
 a version.  It should capture the version into $1.  Defaults to ^v(.+)$
 which matches the default tag from [Dist::Zilla::Plugin::Git::Tag]
 
 You can also set the {V} environment variable to override the new version.
-To bootstrap a version for a distribution that has not been released 
-(and thus not tagged), you need to use this or else set {version} in
-dist.ini (which should prevent this plugin from running).  After the first
-tagged release, you can remove {version} from dist.ini and let this module
-handle it for you.
+This is useful if you need to bump to a specific version.  For example, if
+the last tag is 0.005 and you want to jump to 1.000 you can set V = 1.000.
 
 *NOTE* -- this module is a stop gap while Dist::Zilla is enhanced to
 allow more sophisiticated version number manipulation and may be

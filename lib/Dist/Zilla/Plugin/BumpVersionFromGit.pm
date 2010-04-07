@@ -3,6 +3,7 @@ use warnings;
 package Dist::Zilla::Plugin::BumpVersionFromGit;
 # ABSTRACT: provide a version number by bumping the last git release tag
 
+use Dist::Zilla 2 ();
 use Git::Wrapper;
 use version 0.80 ();
 

@@ -5,37 +5,53 @@ use warnings;
 use lib 't/lib';
 
 use Dist::Zilla;
-use Dist::Zilla::Tester;
+use Dist::Zilla::Tester; # for D::Z::T::UI
 use Git::Wrapper;
 use Path::Class;
-use Test::More      tests => 6;
-use Test::Exception;
-use File::pushd;
+use File::pushd qw/tempd/;
+use File::Copy::Recursive qw/dircopy/;
+
+use Test::More 0.88 tests => 6;
+
+# we chdir around so make @INC absolute
+BEGIN { 
+  @INC = map {; ref($_) ? $_ : dir($_)->absolute->stringify } @INC;
+}
+
+## create temp dist for testing safely outside current tree
+
+my $orig_dir = dir('corpus/version-default')->absolute;
+my $temp_dist = tempd;
+dircopy( $orig_dir, $temp_dist );
+
+## shortcut for new tester object
+
+sub _new_zilla {
+  my $root = shift;
+  return Dist::Zilla->from_config( 
+    { chrome => Dist::Zilla::Tester::UI->new },
+  );
+}
 
 ## Tests start here
 
 {
-  my $tzil = Dist::Zilla::Tester->from_config(
-    { dist_root => 'corpus/version-default' },
-  );
-  ok( $tzil, "created test dist from corpus/version-default");
-  my $wd = pushd $tzil->tempdir->subdir('source');
 
+  my ($zilla, $version);
   system "git init";
   my $git   = Git::Wrapper->new('.');
   $git->add(".");
   $git->commit({ message => 'import' });
-  my ($zilla, $version);
 
   # with no tags and no initialization, should get default
-  $zilla = Dist::Zilla::Tester->from_config( {dist_root => "."} );
+  $zilla = _new_zilla;
   $version = $zilla->version;
   is( $version, "0.001", "default is 0.001" );
 
   # initialize it
   {
       local $ENV{V} = "1.23";
-      $zilla = Dist::Zilla::Tester->from_config( {dist_root => "."} );
+      $zilla = _new_zilla;
       is( $zilla->version, "1.23", "initialized with \$ENV{V}" );
   }
 
@@ -44,7 +60,7 @@ use File::pushd;
   ok( (grep { /v1\.2\.3/ } $git->tag), "wrote v1.2.3 tag" );
 
   {
-      $zilla = Dist::Zilla::Tester->from_config( {dist_root => "."} );
+      $zilla = _new_zilla;
       is( $zilla->version, "1.2.4", "initialized from last tag" );
   }
 
@@ -53,7 +69,7 @@ use File::pushd;
   ok( (grep { /v1\.23/ } $git->tag), "wrote v1.23 tag" );
 
   {
-      $zilla = Dist::Zilla::Tester->from_config( {dist_root => "."} );
+      $zilla = _new_zilla;
       is( $zilla->version, "1.24", "initialized from last tag" );
   }
 

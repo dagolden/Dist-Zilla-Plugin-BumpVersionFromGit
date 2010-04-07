@@ -54,7 +54,7 @@ no Moose;
 
 __END__
 
-=for Pod::Coverage::TrustPod
+=for Pod::Coverage
     provide_version
 
 =begin wikidoc

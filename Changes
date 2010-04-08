@@ -2,6 +2,10 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+    - specify prereqs manually instead of relying
+      on automatic detection to work around a
+      Dist::Zilla bug
+
 0.004     2010-04-07 14:23:39 EST5EDT
 
     - fix tests for new Dist::Zilla 2.0

@@ -5,7 +5,7 @@ use warnings;
 use lib 't/lib';
 
 use Dist::Zilla;
-use Dist::Zilla::Tester; # for D::Z::T::UI
+use Dist::Zilla::Chrome::Test;
 use Git::Wrapper;
 use Path::Class;
 use File::pushd qw/tempd/;
@@ -28,9 +28,9 @@ dircopy( $orig_dir, $temp_dist );
 
 sub _new_zilla {
   my $root = shift;
-  return Dist::Zilla->from_config( 
-    { chrome => Dist::Zilla::Tester::UI->new },
-  );
+  return Dist::Zilla->from_config({
+    chrome => Dist::Zilla::Chrome::Test->new
+  });
 }
 
 ## Tests start here

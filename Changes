@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+    - fixed tests for changes in Dist::Zilla::Tester API
+
 0.006     2010-04-28 14:01:18 EST5EDT
 
     - fixed tests for changes in Dist::Zilla chrome API

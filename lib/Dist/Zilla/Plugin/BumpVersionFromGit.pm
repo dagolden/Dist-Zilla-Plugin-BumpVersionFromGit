@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::BumpVersionFromGit;
-# ABSTRACT: provide a version number by bumping the last git release tag
+# ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
 
 use Dist::Zilla 4 ();
 use Git::Wrapper;
@@ -69,31 +69,9 @@ In your F<dist.ini>:
 
 = DESCRIPTION
 
-This does the [Dist::Zilla::Role::VersionProvider] role.  It finds the last
-version number from tags and increments it as the new version used by
-Dist::Zilla.
-
-The plugin accepts the following options:
-
-* first_version - if the repository has no tags at all, this version
-is used as the first version for the distribution.  It defaults to "0.001".
-* version_regexp - regular expression that matches a tag containing
-a version.  It should capture the version into $1.  Defaults to ^v(.+)$
-which matches the default tag from [Dist::Zilla::Plugin::Git::Tag]
-
-You can also set the {V} environment variable to override the new version.
-This is useful if you need to bump to a specific version.  For example, if
-the last tag is 0.005 and you want to jump to 1.000 you can set V = 1.000.
-
-*NOTE* -- this module is a stop gap while Dist::Zilla is enhanced to
-allow more sophisiticated version number manipulation and may be
-deprecated in the future once those changes are complete.
-
-= SEE ALSO
-
-* [Dist::Zilla::Plugin::VersionFromPrev] and 
-[Dist::Zilla::Plugin::Git::LastVersion] do something similar but in what
-I find to be a more complicated way of doing things
+*NOTE* This distribution is *deprecated*.  The module has been
+reborn as [Dist::Zilla::Plugin::NextVersion] and included in the
+[Dist::Zilla::Plugin::Git] distribution.
 
 =end wikidoc
 

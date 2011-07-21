@@ -2,6 +2,8 @@ Revision history for Dist-Zilla-Plugin-BumpVersionFromGit
 
 {{$NEXT}}
 
+    - fixed typo in link to DZP::Git::NextVersion
+
 0.008     2010-10-10 22:53:07 EST5EDT
 
     - marked this distribution as DEPRECATED

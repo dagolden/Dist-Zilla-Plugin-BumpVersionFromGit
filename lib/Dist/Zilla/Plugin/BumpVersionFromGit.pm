@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::BumpVersionFromGit;
-# ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
+# VERSION
 
 use Dist::Zilla 4 ();
 use Git::Wrapper;
@@ -52,6 +52,8 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
+# ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
+
 __END__
 
 =for Pod::Coverage
@@ -70,7 +72,7 @@ In your F<dist.ini>:
 = DESCRIPTION
 
 *NOTE* This distribution is *deprecated*.  The module has been
-reborn as [Dist::Zilla::Plugin::NextVersion] and included in the
+reborn as [Dist::Zilla::Plugin::Git::NextVersion] and included in the
 [Dist::Zilla::Plugin::Git] distribution.
 
 =end wikidoc

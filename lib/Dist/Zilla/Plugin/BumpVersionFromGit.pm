@@ -1,7 +1,9 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::BumpVersionFromGit;
-# VERSION
+# ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
+
+our $VERSION = '0.010';
 
 use Dist::Zilla 4 ();
 use Git::Wrapper;
@@ -52,16 +54,12 @@ __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
 
-# ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
-
 __END__
 
 =for Pod::Coverage
     provide_version
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
 In your F<dist.ini>:
 
@@ -69,13 +67,11 @@ In your F<dist.ini>:
     first_version = 0.001       ; this is the default
     version_regexp  = ^v(.+)$   ; this is the default
 
-= DESCRIPTION
+=head1 DESCRIPTION
 
-*NOTE* This distribution is *deprecated*.  The module has been
-reborn as [Dist::Zilla::Plugin::Git::NextVersion] and included in the
-[Dist::Zilla::Plugin::Git] distribution.
-
-=end wikidoc
+B<NOTE> This distribution is B<deprecated>.  The module has been
+reborn as L<Dist::Zilla::Plugin::Git::NextVersion> and included in the
+L<Dist::Zilla::Plugin::Git> distribution.
 
 =cut
 

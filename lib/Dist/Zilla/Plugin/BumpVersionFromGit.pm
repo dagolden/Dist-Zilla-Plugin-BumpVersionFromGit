@@ -3,7 +3,7 @@ use warnings;
 package Dist::Zilla::Plugin::BumpVersionFromGit;
 # ABSTRACT: DEPRECATED -- use Dist::Zilla::Plugin::Git::NextVersion instead
 
-our $VERSION = '0.010';
+our $VERSION = '0.011';
 
 use Dist::Zilla 4 ();
 use Git::Wrapper;
